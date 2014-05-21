@@ -1,0 +1,9 @@
+
+
+Basic level -> simple tasks with parameters
+
+Inside tasks give a todo list :P
+
+ETA 11/5/14
+
+mongod --dbpath
