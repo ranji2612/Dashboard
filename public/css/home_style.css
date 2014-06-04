@@ -1,0 +1,85 @@
+body {
+    font-family: arial, helvetica, sans-serif;
+    font-size: 14px;
+    color: black;
+    background-image:bgimg1.jpg;
+	background-repeat:no-repeat;
+	background-attachment:fixed;
+	background-position:center;
+	margin: 200px;
+    padding:0px;
+	
+}
+
+/*table, th, td */
+.tasktable
+{
+	border: 1px solid black;
+	border-collapse:collapse;
+	width:100%;
+	padding:15px;	
+}
+.rowleft
+{
+	text-align:left;
+}
+.rowcenter
+{
+	text-align:center;
+}
+/* This is a comment, by the way */
+
+p {
+    line-height: 21px;
+}
+
+header {
+    color: #ffc;
+    background-color: #900;
+    font-size: 1em;
+    margin: -200px;
+	margin-bottom: 20px;
+    padding: 4px;
+    font-style: bold;
+    text-align: center;
+    letter-spacing: 0.5em;
+    border-bottom-style: solid;
+    border-bottom-width: 0.2em;
+    border-bottom-color: #c00;
+}
+
+h2 {
+    color: white;
+    background-color: #090;
+    font-size: 1.5em;
+    margin: 0;
+    padding: 2px;
+    padding-left: 14px;
+}
+
+h3 {
+    color: #999;
+    font-size: 1.25em;
+}
+
+img {
+    border-style: solid;
+    border-width: 2px;
+    border-color: #ccc;
+}
+
+a {
+    text-decoration: none;
+}
+
+strong {
+    font-style: italic;
+    text-transform: uppercase;
+}
+
+li {
+    color: #900;
+    font-style: italic;
+}
+
+
