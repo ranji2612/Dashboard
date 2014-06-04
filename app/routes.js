@@ -1,4 +1,4 @@
-var MyTask = require('./models/todo');
+	var MyTask = require('./models/todo');
 
 module.exports = function(app,db) {
 
@@ -42,10 +42,8 @@ module.exports = function(app,db) {
 				if (err)
 					res.send(err)
 				res.json(tasks);
-			
 				});
 		});
-		res.redirect('/home');
 	});
 	
 		// delete a task

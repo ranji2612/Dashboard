@@ -1,32 +1,62 @@
+
 <!DOCTYPE html>
+<html lang="en" ng-app="scotchTodo">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-<html ng-app="scotchTodo">
 
-<head>
+    <title>Starter Template for Bootstrap</title>
 
-    <title>Dashboard</title>
-	<link rel="stylesheet" href="home_style.css">
-	
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="starter-template.css" rel="stylesheet">
+
+    
+	<!-- For Angular js-->
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
 	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
 	<script src="core.js"></script>
 	
-</head>
-
-<body ng-controller="mainController">
-
-	<h1>
-	<table style="width: 100%;">
-		<tr>
-			<td style="width: 150px">DashBoard</td>
-			<td>DashBoard</td>
-			<td style="width:150px">Log out</td>
-		</tr>
-	</table>
-
-	</h1>
 	
-	
+  </head>
+
+  <body ng-controller="mainController">
+
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Dashboard</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+    <div class="container">
+
+     <!-- <div class="starter-template">
+        <h1>Bootstrap starter template</h1>
+        <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+      </div>
+	!-->
+
 		
 	<h2>Create New Task</h2>
 	<p>Enter the details below...</p>
@@ -42,7 +72,6 @@
 			<p><input type="submit" ng-click="createTask()"></p>
 		</form>
 	</div>
-	<input type="checkbox" >
 	<a>
 	<h2>My Tasks</h2>
 	
@@ -51,11 +80,11 @@
 
 		<!-- TODO LIST -->
 		<div id="todo-list" class="row">
-			<div class="col-sm-4 col-sm-offset-4">
+			<div class="col-sm-11 col-sm-offset-1">
 
 				<!-- LOOP OVER THE TODOS IN $scope.todos -->
-				<div class="checkbox">
-				<table  class="tasktable">
+				
+				<table  class="table table-striped">
 					<thead>
 							<tr>
 								<th>Title</th>
@@ -73,56 +102,19 @@
 							<td class="rowcenter"><input type="checkbox" ng-click="deleteTask(todo._id)"/></td>
 						</tr>
 					
-				</table></div>
+				</table>
 			</div>
-		</div>
 	
-	<h2>Where to find the tutorial</h2>
-	<p><a href="http://www.htmldog.com"><img src="http://www.htmldog.com/badge1.gif" width="120" height="90" alt="HTML Dog"></a></p>
-	<a>
-	<h3>Some random table</h3>
-	<table>
-		<tr>
-			<td>Row 1, cell 1</td>
-			<td>Row 1, cell 2</td>
-			<td>Row 1, cell 3</td>
-		</tr>
-		<tr>
-			<td>Row 2, cell 1</td>
-			<td>Row 2, cell 2</td>
-			<td>Row 2, cell 3</td>
-		</tr>
-		<tr>
-			<td>Row 3, cell 1</td>
-			<td>Row 3, cell 2</td>
-			<td>Row 3, cell 3</td>
-		</tr>
-		<tr>
-			<td>Row 4, cell 1</td>
-			<td>Row 4, cell 2</td>
-			<td>Row 4, cell 3</td>
-		</tr>
-	</table>
-	</a>
-	<h3>Some random form</h3>
-	<p><strong>Note:</strong> It looks the part, but won't do a damned thing.</p>
-
-	<form action="somescript.php" method="post">
-
-	<p>Name:</p>
-	<p><input name="name" value="Your name"></p>
-
-	<p>Comments: </p>
-	<p><textarea rows="10" cols="20" name="comments">Your comments</textarea></p>
-	<p style="color: blue">Are you:</p>
-	<p><input type="radio" name="areyou" value="male"> Male</p>
-	<p><input type="radio" name="areyou" value="female"> Female</p>
+	
+	  
+		</div>
+    </div><!-- /.container -->
 
 
-	<p><input type="submit"></p>
-
-	</form>
-
-</body>
-
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+  </body>
 </html>

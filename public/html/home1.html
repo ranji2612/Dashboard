@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+
+<html ng-app="scotchTodo">
+
+<head>
+
+    <title>Dashboard</title>
+	<link rel="stylesheet" href="home_style.css">
+	
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
+	<script src="core.js"></script>
+	
+</head>
+
+<body ng-controller="mainController">
+
+	<h1>
+	<table style="width: 100%;">
+		<tr>
+			<td style="width: 150px">DashBoard</td>
+			<td>DashBoard</td>
+			<td style="width:150px">Log out</td>
+		</tr>
+	</table>
+
+	</h1>
+	
+	
+		
+	<h2>Create New Task</h2>
+	<p>Enter the details below...</p>
+	<div id="new-task">
+		<form> <!-- action="/api/todo" method="post"> !-->
+
+			<p>Title:</p>
+			<p><input name="task_title" value="" ng-model="formData.taskname"></p>
+
+			<p>Description: </p>
+			<p><textarea rows="10" cols="20" name="task_description" ng-model="formData.taskdesc">Your comments</textarea></p>
+			
+			<p><input type="submit" ng-click="createTask()"></p>
+		</form>
+	</div>
+	<input type="checkbox" >
+	<a>
+	<div class="row">
+  <div class="col-md-8">.col-md-8</div>
+  <div class="col-md-4">.col-md-4</div>
+</div>
+	<h2>My Tasks</h2>
+	
+	<!-- HEADER AND TODO COUNT -->
+
+
+		<!-- TODO LIST -->
+		<div id="todo-list" class="row">
+			<div class="col-sm-1 col-sm-offset-1">
+
+				<!-- LOOP OVER THE TODOS IN $scope.todos -->
+				<div class="container">
+					
+				<table  class="tasktable">
+					<thead>
+							<tr>
+								<th class="col-md-3">Title</th>
+								<th>Description</th>
+								<th>Complete (%)</th>
+								<th>Assigned by</th>
+								<th>Detele</th>
+							</tr>
+					</thead>
+				</table>
+						<p  ng-repeat="todo in tasks">
+							<p class="rowleft">{{ todo.title }}</p>
+							<p class="rowleft">{{ todo.description }}</p>
+							<p class="rowcenter">{{ todo.pc }}</p>
+							<p class="rowcenter">{{ todo.assignee }}</p>
+							<p class="rowcenter"><input type="checkbox" ng-click="deleteTask(todo._id)"/></p>
+						</p>
+					
+				</div>
+			</div>
+		</div>
+	
+	<h2>Where to find the tutorial</h2>
+	<p><a href="http://www.htmldog.com"><img src="http://www.htmldog.com/badge1.gif" width="120" height="90" alt="HTML Dog"></a></p>
+	<a>
+	<h3>Some random table</h3>
+	<table>
+		<tr>
+			<td>Row 1, cell 1</td>
+			<td>Row 1, cell 2</td>
+			<td>Row 1, cell 3</td>
+		</tr>
+		<tr>
+			<td>Row 2, cell 1</td>
+			<td>Row 2, cell 2</td>
+			<td>Row 2, cell 3</td>
+		</tr>
+		<tr>
+			<td>Row 3, cell 1</td>
+			<td>Row 3, cell 2</td>
+			<td>Row 3, cell 3</td>
+		</tr>
+		<tr>
+			<td>Row 4, cell 1</td>
+			<td>Row 4, cell 2</td>
+			<td>Row 4, cell 3</td>
+		</tr>
+	</table>
+	</a>
+	<h3>Some random form</h3>
+	<p><strong>Note:</strong> It looks the part, but won't do a damned thing.</p>
+
+	<form action="somescript.php" method="post">
+
+	<p>Name:</p>
+	<p><input name="name" value="Your name"></p>
+
+	<p>Comments: </p>
+	<p><textarea rows="10" cols="20" name="comments">Your comments</textarea></p>
+	<p style="color: blue">Are you:</p>
+	<p><input type="radio" name="areyou" value="male"> Male</p>
+	<p><input type="radio" name="areyou" value="female"> Female</p>
+
+
+	<p><input type="submit"></p>
+
+	</form>
+
+</body>
+
+</html>

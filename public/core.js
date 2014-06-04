@@ -17,7 +17,8 @@ function mainController($scope, $http) {
 		console.log("In core");
 		$http.post('/api/tasks', $scope.formData)
 			.success(function(data) {
-				$scope.formData = {}; // clear the form
+				$scope.formData = {};     // clear the form
+				$scope.tasks = data;      // Updating the JSON
 			})
 			.error(function(data) {
 				console.log('Error: ' + data);
