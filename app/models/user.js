@@ -1,17 +1,21 @@
-var mongoose = require('moongose')
+//./app/model/user.js
+var mongoose = require('mongoose')
 var bcrypt = require('bcrypt-nodejs')
 
-var userSchema = moongose.Schema({
+//decalring user schema
+var userSchema = mongoose.Schema({
 	email : String,
 	password : String,
 });
 
+//method to hash password
 userSchema.methods.generateHash = function(password){
 	return bcrypt.hashSync(password, bcrypt.genSaltSync(8),null);
-});
-
-userScehema/method.validatePassword = function(password){
-	return bcrypt.compareSync(password, this.local.password):
 };
 
-modules.exports = moongose.model('User', userSchema);
+//method to validate password
+userSchema.method.validatePassword = function(password){
+	return bcrypt.compareSync(password, this.local.password);
+};
+
+module.exports = mongoose.model('User', userSchema);
