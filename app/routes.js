@@ -1,6 +1,6 @@
 	var MyTask = require('./models/todo');
 
-module.exports = function(app,db) {
+module.exports = function(app, passport) {
 
 	// api ---------------------------------------------------------------------
 	// get all todos
@@ -11,6 +11,26 @@ module.exports = function(app,db) {
 		res.sendfile('./public/html/home.html'); // load the single view file (angular will handle the page changes on the front-end)
 	});
 	
+	
+	app.get('/dashboard', function(req, res){
+		res.sendfile('./public/html/dashboard.html');
+	});
+	
+	app.post('/home', passport.authenticate('local-login', {
+		successRedirect : '/profile', // redirect to the secure profile section
+		failureRedirect : '/home', // redirect back to the signup page if there is an error
+		failureFlash : true // allow flash messages
+	}));
+	//GET function for signup page
+	app.get('/signup', function(req, res){
+		res.sendfile('./public/html/signup.html');
+	});
+	
+	app.post('/signup', passport.authenticate('local-signup', {
+		successRedirect : '/dashboard', // redirect to the secure profile section
+		failureRedirect : '/signup', // redirect back to the signup page if there is an error
+		failureFlash : false // allow flash messages
+	}));
 	
 	// get all tasks
 	app.get('/api/tasks', function(req, res) {
