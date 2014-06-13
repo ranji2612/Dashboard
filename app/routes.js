@@ -11,8 +11,12 @@ module.exports = function(app, passport) {
 		res.sendfile('./public/html/home.html'); // load the single view file (angular will handle the page changes on the front-end)
 	});
 	
+	app.get('/logout', function(req, res) {
+		req.logout();
+		res.redirect('/home');
+	});
 	
-	app.get('/dashboard', function(req, res){
+	app.get('/dashboard', isLoggedIn, function(req, res){
 		res.sendfile('./public/html/dashboard.html');
 	});
 	
@@ -83,3 +87,13 @@ module.exports = function(app, passport) {
 	});
 	
 };
+// route middleware to make sure
+function isLoggedIn(req, res, next) {
+
+	// if user is authenticated in the session, carry on
+	if (req.isAuthenticated())
+		return next();
+
+	// if they aren't redirect them to the home page
+	res.redirect('/home');
+}
