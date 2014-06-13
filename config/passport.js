@@ -44,28 +44,34 @@ module.exports = function(passport) {
         // asynchronous
         // User.findOne wont fire unless data is sent back
         process.nextTick(function() {
-
+			console.log ('in next');
 		// find a user whose email is the same as the forms email
 		// we are checking to see if the user trying to login already exists
-        User.findOne({ 'local.email' :  email }, function(err, user) {
+			console.log(email);
+			console.log(password);
+        User.findOne({ 'email' :  email }, function(err, user) {
             // if there are any errors, return the error
+			console.log('hi terehe');
             if (err)
                 return done(err);
-
+			
             // check to see if theres already a user with that email
             if (user) {
+				console.log('hi terehe1');
                 return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
             } else {
-
+				console.log('hi terehe2');
 				// if there is no user with that email
                 // create the user
+				console.log('Creating new User');
                 var newUser            = new User();
 
                 // set the user's local credentials
-                newUser.local.email    = email;
-                newUser.local.password = newUser.generateHash(password);
+                newUser.email    = email;
+                newUser.password = newUser.generateHash(password);
 
 				// save the user
+				console.log('Saving User info');
                 newUser.save(function(err) {
                     if (err)
                         throw err;
