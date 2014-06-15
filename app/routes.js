@@ -40,21 +40,19 @@ module.exports = function(app, passport) {
 	
 	// Routes for Tasks
 	app.get('/api/tasks', function(req, res) {
-
+	
 		// use mongoose to get all tasks in the database
 		MyTask.find(function(err, tasks) {
-
 			// if there is an error retrieving, send the error. nothing after res.send(err) will execute
 			if (err)
 				res.send(err)
-
 			res.json(tasks); // return all tasks in JSON format
 		});
 	});
 	
 	// create tasks and send back all tasks after creation
 	app.post('/api/tasks', function(req, res) {
-		console.log("working");
+	
 		// create a todo, information comes from Angular
 		MyTask.create({
 			title: req.body.taskname,
@@ -92,7 +90,6 @@ module.exports = function(app, passport) {
 
 // route middleware to make sure
 function isLoggedIn(req, res, next) {
-
 	// if user is authenticated in the session, carry on
 	if (req.isAuthenticated())
 		return next();
