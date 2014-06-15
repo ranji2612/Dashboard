@@ -1,4 +1,4 @@
-	var MyTask = require('./models/todo');
+	var MyTask = require('./models/task');
 
 module.exports = function(app, passport) {
 
@@ -7,22 +7,22 @@ module.exports = function(app, passport) {
 	
 	
 	// application -------------------------------------------------------------
-	app.get('/home', function(req, res) {
-		res.sendfile('./public/html/home.html'); // load the single view file (angular will handle the page changes on the front-end)
+	app.get('/login', function(req, res) {
+		res.sendfile('./public/html/login.html'); // load the single view file (angular will handle the page changes on the front-end)
 	});
 	
 	app.get('/logout', function(req, res) {
 		req.logout();
-		res.redirect('/home');
+		res.redirect('/login');
 	});
 	
-	app.get('/dashboard', isLoggedIn, function(req, res){
-		res.sendfile('./public/html/dashboard.html');
+	app.get('/home', isLoggedIn, function(req, res){
+		res.sendfile('./public/html/home.html');
 	});
 	
-	app.post('/home', passport.authenticate('local-login', {
-		successRedirect : '/dashboard', // redirect to the secure profile section
-		failureRedirect : '/home', // redirect back to the signup page if there is an error
+	app.post('/login', passport.authenticate('local-login', {
+		successRedirect : '/home', // redirect to the secure profile section
+		failureRedirect : '/login', // redirect back to the signup page if there is an error
 		failureFlash : true // allow flash messages
 	}));
 	//GET function for signup page
@@ -31,12 +31,14 @@ module.exports = function(app, passport) {
 	});
 	
 	app.post('/signup', passport.authenticate('local-signup', {
-		successRedirect : '/dashboard', // redirect to the secure profile section
+		successRedirect : '/home', // redirect to the secure profile section
 		failureRedirect : '/signup', // redirect back to the signup page if there is an error
 		failureFlash : false // allow flash messages
 	}));
 	
-	// get all tasks
+	
+	
+	// Routes for Tasks
 	app.get('/api/tasks', function(req, res) {
 
 		// use mongoose to get all tasks in the database
@@ -50,7 +52,7 @@ module.exports = function(app, passport) {
 		});
 	});
 	
-	// create todo and send back all tasks after creation
+	// create tasks and send back all tasks after creation
 	app.post('/api/tasks', function(req, res) {
 		console.log("working");
 		// create a todo, information comes from Angular
@@ -70,7 +72,7 @@ module.exports = function(app, passport) {
 		});
 	});
 	
-		// delete a task
+	// delete a task and send back all tasks after deletion
 	app.delete('/api/tasks/:task_id', function(req, res) {
 		MyTask.remove({
 			_id : req.params.task_id
@@ -87,6 +89,7 @@ module.exports = function(app, passport) {
 	});
 	
 };
+
 // route middleware to make sure
 function isLoggedIn(req, res, next) {
 
@@ -95,5 +98,5 @@ function isLoggedIn(req, res, next) {
 		return next();
 
 	// if they aren't redirect them to the home page
-	res.redirect('/home');
+	res.redirect('/login');
 }
