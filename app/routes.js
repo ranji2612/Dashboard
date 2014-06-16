@@ -17,6 +17,7 @@ module.exports = function(app, passport) {
 	});
 	
 	app.get('/home', isLoggedIn, function(req, res){
+		es.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
 		res.sendfile('./public/html/home.html');
 	});
 	
