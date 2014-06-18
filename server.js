@@ -15,6 +15,7 @@ app.configure(function() {
 	app.use(express.static(__dirname + '/public')); 		// For core functionality
 	app.use(express.static(__dirname + '/public/html')); 	// For all HTML files
 	app.use(express.static(__dirname + '/public/css')); 	// For all the corresponding css files
+	app.use(express.static(__dirname + '/public/js')); 		// For all the js files
 	app.use(express.static(__dirname + '/public/Bootstrap')); 	// For all the corresponding css files
 	
 	app.use(express.logger('dev')); 						// log every request to the console

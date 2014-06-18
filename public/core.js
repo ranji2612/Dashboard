@@ -1,6 +1,6 @@
 var angularTask = angular.module('angularTask', []);
 
-function mainController($scope, $http) {
+angularTask.controller('mainController', function ($scope, $http) {
 	$scope.formData = {};
 
 	// when landing on the page, get all tasks and show them
@@ -14,7 +14,7 @@ function mainController($scope, $http) {
 
 	// when submitting the add form, send the text to the node API
 	$scope.createTask = function() {
-		console.log("In core");
+		
 		$http.post('/api/tasks', $scope.formData)
 			.success(function(data) {
 				$scope.formData = {};     // clear the form
@@ -36,4 +36,6 @@ function mainController($scope, $http) {
 			});
 	};
 
-}
+});
+
+
