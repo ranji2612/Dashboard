@@ -60,10 +60,10 @@ module.exports = function(passport) {
 		// if there is no user with that email
                 // create the user
 
-                var newUser            = new User();
-                // set the user's local credentials
-                newUser.email    = email;
-                newUser.password = newUser.generateHash(password);
+        var newUser            = new User();
+        // set the user's local credentials
+        newUser.email    = email;
+        newUser.password = newUser.generateHash(password);
 		newUser.givenName = req.param('givenName');
 		newUser.familyName = req.param('familyName');
 

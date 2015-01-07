@@ -59,7 +59,7 @@ module.exports = function(app, passport) {
 			title: req.body.taskname,
 			description: req.body.taskdesc,
 			pc : 0,
-			assignee: req.user.email
+			assignee: req.user.givenName
 		},function(err, todo) {
 			if (err)
 				res.send(err);
