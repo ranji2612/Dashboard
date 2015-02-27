@@ -1,9 +1,9 @@
 {
-  "name": "AngNews",
+  "name": "Dashboard",
   "version": "0.0.1",
-  "description": "Angular News",
+  "description": "Team collaboration and task management app",
   "main": "server.js",
-  "author": "Ranjith",
+  "author": "Ranjith Kumar & Sairam Arunachalam",
   "dependencies": {
     "bcrypt-nodejs": "latest",
     "body-parser": "~1.0.0",

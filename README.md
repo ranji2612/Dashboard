@@ -1,4 +1,4 @@
-Flight App V 1.0
+Dashboard
 ==========
 
-Find, compare and track Cheap Flight Fare
+Team collaboration and task management app, built using MEAN stack.
