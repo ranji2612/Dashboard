@@ -15,6 +15,7 @@ app.controller('homeCtrl', function ($scope,$http,$location,$route) {
 	//Gen stuff
 	$scope.IP = "10.159.137.84";
 	
+	//---------------------------------- START OF VOICE ------------------------------
 	// For speech recognition
 	$scope.micStatus = "mdi-av-mic-none";
 	$scope.micHide = false;
@@ -49,6 +50,7 @@ app.controller('homeCtrl', function ($scope,$http,$location,$route) {
 		//recognition.end();
 		recognition.start();
 	};
+	//---------------------------------- END OF VOICE ------------------------------
 	
 	//for showing tasks on landing page
 	$scope.startFunc = function() {
@@ -156,12 +158,12 @@ app.controller('homeCtrl', function ($scope,$http,$location,$route) {
 					flag=0;
 					if(action=="create") {
 						if(objExists(data,'task')){
-							if (data.task!='') {
+							if (lastObj[0]=='task' && data.task!='') {
 								
 								$scope.taskName = (data.task[0]).toUpperCase()+data.task.slice(1);
 							} else {
 								if(objExists(data,'name')) {
-									$scope.taskName = (data.task[0]).toUpperCase()+data.task.slice(1);
+									$scope.taskName = (data.name[0]).toUpperCase()+data.name.slice(1);
 								} else if (objExists(data,'description')) {
 									$scope.taskDesc = data.description;
 								}
