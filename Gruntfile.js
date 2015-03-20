@@ -71,6 +71,7 @@ module.exports = function(grunt) {
 	
 	
 	//Register the Grunt task with required modules
-	grunt.registerTask('default',['clean','jshint','mochaTest','ngAnnotate','uglify','express:dev']);
+	grunt.registerTask('default',['clean','jshint','ngAnnotate','uglify','express:dev']);
+	grunt.registerTask('dev',['clean','jshint','express:dev']);
 	grunt.registerTask('test',['clean','jshint','mochaTest']);
 };

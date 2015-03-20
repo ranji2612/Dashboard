@@ -1,5 +1,5 @@
 <html>
-<head><title>Angular</title>
+<head><title>Dashboard</title>
 
 	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<!-- For date and combobox libraries -->
@@ -18,26 +18,121 @@
 </head>
 <body  ng-app="mainApp">
 	<div ng-controller="homeCtrl">
+	<!-- Jargon Query -->
+	<div id="failModal" class="modal fade" tabindex="-1" role="dialog" ng-hide="selectedPage">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+					
+				</div>
+				<div class="modal-body">
+					<div>
+						<h5>Sorry.. We couldn't understand..</h5>
+					</div>
+					<div>				
+				</div>
+				<div class="modal-footer"></div>
+					<a class="btn btn-default" data-dismiss="modal" href="javascript:void(0)">Cancel</a> 				
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- modal to create  a new task -->
+	<div id="newTaskModal" class="modal fade" tabindex="-1" role="dialog" ng-hide="selectedPage">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+					<h4 class="modal-title">Enter details of the Task..</h4>
+				</div>
+				<div class="modal-body">
+					<div>
+						<div  class="col-sm-12"><h5>Task Name </h5></div>
+						<div class="col-sm-12"><input type="text" autocomplete="on" class="col-sm-12 input input-group form-control square-border"  ng-model="taskName" placeholder="simple name for easy reference"/></div>
+					</div>
+					<div>
+						<div class="col-sm-12"><h5>Task description </h5></div>
+						<div class="col-sm-12"><input type="text" autocomplete="on" class="col-sm-12 input input-group form-control square-border"  ng-model="taskDesc" placeholder="Description of the task"/></div>
+					</div>
+					<div>				
+				</div>
+				<div class="modal-footer"></div>
+					<a class="btn btn-primary" href="javascript:void(0)" ng-click="addNewTask()">Create</a>
+					<a class="btn btn-default" data-dismiss="modal" href="javascript:void(0)">Cancel</a> 				
+				</div>
+			</div>
+		</div>
+	</div>
+		
+	<!-- modal to create open a task  ofcourse in edit mode-->
+	<div id="editTaskModal" class="modal fade" tabindex="-1" role="dialog" ng-hide="selectedPage">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+					<h4 class="modal-title">Details of the Task..</h4>
+				</div>
+				<div class="modal-body">
+					<div>
+						<div  class="col-sm-12"><h6>Task Name </h6></div>
+						<div class="col-sm-12"><input type="text" autocomplete="on" class="col-sm-12 input input-group form-control square-border"  ng-model="editTask.tn" placeholder="simple name for easy reference"/></div>
+					</div>
+					<div>
+						<div class="col-sm-12"><h6>Task description </h6></div>
+						<div class="col-sm-12"><input type="text" autocomplete="on" class="col-sm-12 input input-group form-control square-border"  ng-model="editTask.td" placeholder="Description of the task"/></div>
+					</div>
+					<div>				
+				</div>
+				<div class="modal-footer"></div>
+					<a class="btn btn-primary" href="javascript:void(0)" ng-click="updateTask()">Save</a>
+					<a class="btn btn-default" data-dismiss="modal" href="javascript:void(0)">Close</a> 				
+				</div>
+			</div>
+		</div>
+	</div>
 
-	
-	<div class="navbar navbar-fixed-top shadow-z-2">
+	<div class="navbar navbar-fixed-top shadow-z-2 btn-material-brown">
 		<div class="get-shadows">
 		<div class="container">
 			<div class="navbar-header">
-				<div class="pull-right">
-					<ul class="nav  navbar-nav navbar-right">
-					  <li class="{{menuBarButton[0]}}" ng-click="menuButtonClick(0)"><a href="/home">&nbsp;Home&nbsp;</a></li>
-					  <li class="{{menuBarButton[1]}}" ng-click="menuButtonClick(1)"><a href="/track">&nbsp;Track&nbsp;</a></li>
-					  <li class="{{menuBarButton[2]}}" ng-click="menuButtonClick(2)"><a href="/about">How it Works</a></li>
-					  <!-- Switching between Login and Account -->
-					</ul>
-				</div>
+				<a class="navbar-brand" href="/home">&nbsp;Dashboard&nbsp;</a>
 			</div>
+			
+				
+			<ul class="nav  navbar-nav navbar-right">
+				<li >
+					<form class="navbar-form" ng-submit="searchAction()">
+						<input type="text"  class="input input-group form-control btn-material-brown" placeholder="Search" ng-model="formData.query">
+						<i class="{{micStatus}}" ng-hide="micHide" ng-click="startVoiceSearch()"></i>
+						</input>
+					</form>
+				</li>
+				<li class="Active" ng-click="createNewTaskPopup()"><a href="">New Task</a></li>
+				
+
+			  <!-- Switching between Login and Account -->
+			</ul>
+					 
+				
+			
 		</div>
 		</div>
 	</div>
 	<div class="container">
 		<br/><br/><br/>
+		
+		<div class="container panel" style="height:80%;">
+			<br/><br/>
+
+
+			<h2>My Tasks</h2>
+			<div class="row">
+				<div class="col-sm-12 task" ng-repeat="task in tasks">
+					<p><strong>{{task.tn}}</strong><br/>{{task.td}}</p>
+				</div>	
+			</div>
+		</div>
 		<!--			 Code Below - Angular Routing for Templating		-->
 		<div  ng-view="">
 		</div>
@@ -48,7 +143,7 @@
 			<div class="row">
 				<div class="col-md-12" align="center">
 					<div >
-						<small><p>v1.0 | @ranji2612 | © Ra-Ma 2015</p></small>
+						<small><p>v1.0 | @ranji2612 | 2015</p></small>
 					</div>
 				</div>
 				<!-- <div class="col-md-9" align="right">
@@ -74,28 +169,19 @@
 	<script src="js/bootstrap-datepicker.js"></script>
 	<script src="js/bootstrap-combobox.js"></script>
 	<script src="bootstrap/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1','packages':['corechart']}]}"></script> 
 	
 	<script src="js/ripples.min.js"></script>
     <script src="js/material.min.js"></script>
-	<!-- App script files  
+	<!-- App script files  -->
 	<script src="app.js"></script>
 	<script src="controllers/indexCtrl.js"></script>
-	<script src="controllers/trackCtrl.js"></script>
-	<script src="services/flightTrack.js"></script>
-	<script src="services/flightRateChange.js"></script>
 	<script src="filters/dispDateFormat.js"></script>
 	<script src="filters/timeShow.js"></script>  
-	<!-- --><script src="js/app.min.js"></script>  
+	<!-- <script src="js/app.min.js"></script>  -->
 	
 	<!-- <script type="text/javascript" src="https://www.google.com/jsapi"></script> -->
-	<!-- for Google Graph -->
+	
     
-    <script>
-            $(document).ready(function() {
-                $.material.init();
-            });
-    </script>
 	<!-- End of Scripts -->
 </body>
 </html>

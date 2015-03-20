@@ -4,6 +4,7 @@ var Schema = mongoose.Schema;
 
 var dbSchema = new Schema({
 	tn	: String,
+	td	: String,
 	cb	: String,
 	cd	: Number,
 	ed	: Number,

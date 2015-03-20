@@ -1,13 +1,19 @@
 /* MenuBar */
 
-/* MAIN POSTS PAGE */
-.post {
+/* MAIN Tasks PAGE */
+.task1 {
   background: #fff;
-  padding:10px 0;
+  padding:10px 50px ;
   -moz-box-shadow: 0 0 5px rgba(0,0,0,0.4);
   -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.4);
   box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
+
+.task {
+  background: #fff;
+  padding:10px 50px ;
+}
+
 
 .info {
   

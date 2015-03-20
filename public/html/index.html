@@ -1,7 +1,12 @@
 
-<div >
-	Welcome {{message}}
+<div class="container panel" style="height:80%;">
+	<br/><br/>
+	
+	
+	<h2>My Tasks</h2>
 	<div class="row">
-		
+		<div class="col-sm-12 task" ng-repeat="task in tasks">
+			<p><strong>{{task.tn}}</strong><br/>{{task.td}}</p>
+		</div>	
 	</div>
 </div>

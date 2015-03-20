@@ -32,6 +32,7 @@ app.use(cookieParser())
 // All the minified files will be stored in dist Eg. dist/js/app.min.js 
 app.use(express.static(__dirname + '/dist')); 	// set the static files location
 app.use(express.static(__dirname + '/public')); 	// set the static files location
+app.use(express.static(__dirname + '/scripts')); 	// set the static files location
 
 require('./config/security/passport.js')(passport);
 //route file
@@ -39,6 +40,6 @@ require('./app/routes/routes.js')(app,passport);
 
 
 //Start the awesomeness
-app.listen(8080 ,function() {	
-	console.log('Magic happens on port 8080'); 
+app.listen(port ,function() {	
+	console.log('Magic happens on port ',port); 
 });
