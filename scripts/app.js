@@ -13,7 +13,7 @@ app.config(function ($routeProvider, $locationProvider) {
 
 app.controller('homeCtrl', function ($scope,$http,$location,$route) {
 	//Gen stuff
-	$scope.IP = "10.159.137.84";
+	$scope.IP = "10.159.232.173";
 	
 	//---------------------------------- START OF VOICE ------------------------------
 	// For speech recognition
@@ -67,6 +67,7 @@ app.controller('homeCtrl', function ($scope,$http,$location,$route) {
 	//Form data to get query data
     $scope.formData={};
 	$scope.editTask = {};
+	$scope.showTask = false;
     $scope.formData.query="";
 	$scope.queryObjects={};
 	//For menu
@@ -105,6 +106,26 @@ app.controller('homeCtrl', function ($scope,$http,$location,$route) {
 		$route.reload();
 	};
 	
+	$scope.updateTask = function() {
+		//$('#newTaskModal').modal('hide');
+		$http.post('/api/tasks', {tn:$scope.taskName,td:$scope.taskDesc,st:0})
+		.success(function(data) {
+				$scope.taskName='';
+				$scope.taskDesc='';
+				$scope.$apply(function(){
+					$scope.startFunc();
+				});
+		})
+		.error(function(data) {
+			console.log('Error: ' + data);
+		});
+		$route.reload();
+	};
+	
+	$scope.hideTaskDisplay = function() {
+		$scope.showTask=false;
+		$scope.formData.query="";
+	};
 	// 
 	//------------------------------------------ SEARCH -------------------------------------
 	//Function which performs search action
@@ -174,17 +195,40 @@ app.controller('homeCtrl', function ($scope,$http,$location,$route) {
 
 					} else if (action=="edit") {
 						if (objExists(data,'task')) {
-							$http.get('/api/tasks/'+data.task)
+							$http.get('/api/tasks/'+(data.task[0]).toUpperCase()+data.task.slice(1))
 							.success(function(data) {
 								$scope.editTask = data;
+								$scope.showTask = true;
+								$scope.edittable = true;
 								console.log('Reached data for edit',data);
-								$('#editTaskModal').modal('toggle');
+								//$('#editTaskModal').modal('toggle');
+								if (lastObj[0]=='task' && data.task!='') { }
+								else {
+									if(objExists(data,'name')) {
+										$scope.editTask.tn = (data.name[0]).toUpperCase()+data.name.slice(1);
+									} else if (objExists(data,'description')) {
+										$scope.editTask.td = data.description;
+									}
+								}
 							})
 							.error(function(err){
 								console.log(err);
 							});
 						}
 					} else if (action=="read") {
+						if (objExists(data,'task')) {
+							$http.get('/api/tasks/'+data.task)
+							.success(function(data) {
+								$scope.editTask = data;
+								$scope.showTask = true;
+								$scope.edittable = false;
+								console.log('Reached data for edit',data);
+								//$('#editTaskModal').modal('toggle');
+							})
+							.error(function(err){
+								console.log(err);
+							});
+						}
 
 					} else if (action=="delete") {
 

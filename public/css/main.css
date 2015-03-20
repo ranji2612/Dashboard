@@ -1,5 +1,24 @@
 /* MenuBar */
+.outer {
+    display: table;
+    position: absolute;
+	width : 65%;
+    height: 80%;
+    
+}
 
+.middle {
+	/*position: relative;*/
+	font-size: 16px;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.inner {
+    margin-left: auto;
+    margin-right: auto; 
+    width: /*whatever width you want*/;
+}
 /* MAIN Tasks PAGE */
 .task1 {
   background: #fff;
