@@ -28,6 +28,16 @@ router.get('/:taskName', function( req, res) {
 	});
 });
 
+//Delete specific task based in Id
+router.delete('/:taskName', function( req, res) {
+	//Return first 10 or 20 tasks based on some criteria
+	//taskModel.find({"_id": mongoose.Types.ObjectId(req.params.taskId)},function(err, data) {
+	taskModel.remove({tn:req.params.taskName},function(err, data) {
+		if(err) res.send(err);
+		res.json(data[0]);
+	});
+});
+
 //Create a new task
 router.post('/', function(req,res) {
 	

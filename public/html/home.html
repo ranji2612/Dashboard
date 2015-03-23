@@ -19,12 +19,29 @@
 <body  ng-app="mainApp">
 	<div ng-controller="homeCtrl">
 	<!-- Jargon Query -->
+	<div id="deleteModal" class="modal fade" tabindex="-1" role="dialog" ng-hide="selectedPage">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div>
+						<h4>Are you sure you want to delete task {{taskName}}</h4>
+					</div>
+					
+				</div>
+				<div class="modal-footer">
+					<a class="btn btn-primary" data-dismiss="modal" href="javascript:void(0)" ng-click="deleteTask(taskName)">Yes</a> 
+					<a class="btn btn-default" data-dismiss="modal" href="javascript:void(0)">No</a> 	
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Jargon Query -->
 	<div id="failModal" class="modal fade" tabindex="-1" role="dialog" ng-hide="selectedPage">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-body">
 					<div>
-						<h5>Sorry.. We couldn't understand..</h5>
+						<h5>{{message}}</h5>
 					</div>
 					
 				</div>
@@ -123,10 +140,10 @@
 			<div class="inner ">		
 				<div class="row">
 					<div class="col-sm-1"></div>
-					<div class="col-sm-10">
-						<h1><h1>Dashboard<p class="url">A minimal task management App</p></h1></h1><br/>
+					<div class="col-sm-10" >
+						<h1>Dashboard<p class="url">Natural language search</p></h1>
 						<form class="input" ng-submit="searchAction()">
-							<input type="text"  class="input input-group form-control" style="font-size:19px;" ng-model="formData.query" placeholder="What do you want to do ? ... " >
+							<input type="text"  class="input input-group form-control" style="font-size:19px;" ng-model="formData.query" placeholder="What do you want to do ? ... Eg. Create a task, List all tasks etc.. " >
 						</form>
 
 
@@ -138,24 +155,37 @@
 					<br/><hr width="50%"/><br/>
 					<div class="col-sm-11 col-xs-offset-1">
 							<h5 class="url">Task Name</h5>
-							<div  ng-hide="edittable"><strong><h3>{{editTask.tn}}</h3></strong></div>
-							<div class="" ng-show="edittable"><input type="text" autocomplete="on" class="col-sm-12 input input-group form-control square-border"  ng-model="editTask.tn" placeholder="simple name for easy reference"/></div>
+							<div  ng-hide="edittable"><strong><h3>{{editTask.tn | firstCaps}}</h3></strong></div>
+						<div class="" ng-show="edittable"><input type="text" autocomplete="on" class="col-sm-12 input input-group form-control square-border"  ng-model="editTask.tn | firstCaps" placeholder="simple name for easy reference"/></div>
 					</div>
 					<div class="col-sm-11 col-xs-offset-1">
 							<h5 class="url">Task Description</h5>
-							<div  ng-hide="edittable"><strong><h3>{{editTask.td}}</h3></strong></div>
-							<div class="" ng-show="edittable"><input type="text" autocomplete="on" class="col-sm-12 input input-group form-control square-border"  ng-model="editTask.td" placeholder="Description of the task"/></div>
+							<div  ng-hide="edittable"><strong><h3>{{editTask.td | firstCaps}}</h3></strong></div>
+							<div class="" ng-show="edittable"><input type="text" autocomplete="on" class="col-sm-12 input input-group form-control square-border"  ng-model="editTask.td | firstCaps" placeholder="Description of the task"/></div>
 					</div>
 					
 					
 					<div ng-show="edittable" class="col-sm-11 col-xs-offset-1">
 						<a class="btn btn-primary" href="javascript:void(0)" ng-click="updateTask()">Save</a>
-						<a class="btn btn-default" data-dismiss="modal" href="javascript:void(0)">Close</a> 				
+						<a class="btn btn-default" href="javascript:void(0)" ng-click="hideTaskDisplay()">Close</a>				
 					</div>
 					<div ng-hide="edittable" class="col-sm-11 col-xs-offset-1">
 						<a class="btn btn-default" href="javascript:void(0)" ng-click="hideTaskDisplay()">Close</a> 
 					</div>
 					
+					
+				</div>
+				
+				<div ng-show="showTaskList" class="row" style="height:300px; overflow-y: scroll;">
+					<div class="col-sm-11 col-xs-offset-1 btn-material-brown">
+						<div class="col-sm-2"><strong>Task Name</strong></div>
+						<div class="col-sm-10"><strong>Task Description</strong></div>
+					</div>
+					
+					<div ng-repeat="task in taskList" class="col-sm-11 col-xs-offset-1">
+						<div class="col-sm-2"><strong>{{task.tn | firstCaps}}</strong></div>
+						<div class="col-sm-10">{{task.td}}</div>
+					</div>
 					
 				</div>
 			</div>
@@ -219,7 +249,7 @@
 	<script src="app.js"></script>
 	<script src="controllers/indexCtrl.js"></script>
 	<script src="filters/dispDateFormat.js"></script>
-	<script src="filters/timeShow.js"></script>  
+	<script src="filters/firstCaps.js"></script>  
 	<!-- <script src="js/app.min.js"></script>  -->
 	
 	<!-- <script type="text/javascript" src="https://www.google.com/jsapi"></script> -->
